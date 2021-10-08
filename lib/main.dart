@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'THE VOID',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -22,9 +22,11 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
+        // primarySwatch: Colors.white,
+        primaryColor: const Color(0xff9ad5f4),
+        scaffoldBackgroundColor: const Color(0xff487B9a),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'THE VOID'),
     );
   }
 }
@@ -44,12 +46,10 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -57,10 +57,18 @@ class _MyHomePageState extends State<MyHomePage> {
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
-      _counter++;
     });
   }
 
+  void goToSettings() {
+    setState(() {});
+  }
+
+  // void clearText(){
+  //   TextField.clear()
+  // }
+  var fieldControl = TextEditingController();
+  var currentSaved = "";
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -74,6 +82,14 @@ class _MyHomePageState extends State<MyHomePage> {
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
+        actions: [
+          IconButton(
+            onPressed: goToSettings,
+            icon: const Icon(Icons.settings),
+            color: const Color(0xff9ad5f4),
+            highlightColor: Colors.blue,
+          )
+        ],
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
@@ -95,13 +111,71 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            // Text(
+            //   'HELLO WORLD',
+            // ),
+            // Text(
+            //   '$_counter',
+            //   style: Theme.of(context).textTheme.headline4,
             const Text(
-              'You have pushed the button this many times:',
+              'Enter troubles here',
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+
+            TextField(
+              controller: fieldControl,
+              maxLines: null,
+              style: const TextStyle(
+                color: Colors.white,
+              ),
+              decoration: const InputDecoration(
+                  fillColor: Color(0xff0A1127),
+                  filled: true,
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.red),
+                  ),
+                  border: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white))),
             ),
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+              TextButton(
+                child: const Text('SUBMIT'),
+                onPressed: () {
+                  // debugPrint(fieldControl.text);
+                  currentSaved = fieldControl.text;
+                  fieldControl.text = "";
+                },
+                style: TextButton.styleFrom(
+                  padding: const EdgeInsets.all(16.0),
+                  primary: Colors.white,
+                  textStyle: const TextStyle(fontSize: 20),
+                ),
+              ),
+              TextButton(
+                child: const Text('CLEAR'),
+                onPressed: () {
+                  fieldControl.text = "";
+                },
+                style: TextButton.styleFrom(
+                  padding: const EdgeInsets.all(16.0),
+                  primary: Colors.white,
+                  textStyle: const TextStyle(fontSize: 20),
+                ),
+              ),
+              TextButton(
+                child: const Text('REPLACE'),
+                onPressed: () {
+                  fieldControl.text = currentSaved;
+                },
+                style: TextButton.styleFrom(
+                  padding: const EdgeInsets.all(16.0),
+                  primary: Colors.white,
+                  textStyle: const TextStyle(fontSize: 20),
+                ),
+              ),
+            ])
           ],
         ),
       ),
