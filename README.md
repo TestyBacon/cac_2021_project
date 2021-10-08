@@ -5,4 +5,6 @@ This is our CAC 2021 project.
 
 ## Main.dart inside the lib folder
 
-I don't exactly understand Forking vs Branching but I think Branching is better
+This should show you how to use github in visual studio code
+https://code.visualstudio.com/docs/editor/github
+You need to install 2 things to visual studio code
