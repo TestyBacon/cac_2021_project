@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Dart & Flutter",
+            "name": "Flutter",
             "request": "launch",
             "type": "dart",
             "program": "TestyBacon/cac_2021_project/lib/main.dart"
