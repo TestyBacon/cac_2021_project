@@ -1,6 +1,6 @@
 {
-    "name": "cac_2021_project",
-    "short_name": "cac_2021_project",
+    "name": "test_program",
+    "short_name": "test_program",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

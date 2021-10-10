@@ -4,11 +4,11 @@ set(CMAKE_SYSTEM_VERSION 10.0)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED YES)
 
-project(cac_2021_project LANGUAGES CXX)
+project(test_program LANGUAGES CXX)
 
 cmake_policy(SET CMP0079 NEW)
 
-set(BINARY_NAME "cac_2021_project")
+set(BINARY_NAME "test_program")
 
 # Configure build options.
 get_property(IS_MULTICONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)

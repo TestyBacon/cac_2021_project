@@ -5,10 +5,14 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Dart & Flutter",
+            "name": "test_program",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "test_program (profile mode)",
             "request": "launch",
             "type": "dart",
-            "program": "lib/main.dart",
             "flutterMode": "profile"
         }
     ]

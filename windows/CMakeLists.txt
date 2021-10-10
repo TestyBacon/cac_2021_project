@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
-project(cac_2021_project LANGUAGES CXX)
+project(test_program LANGUAGES CXX)
 
-set(BINARY_NAME "cac_2021_project")
+set(BINARY_NAME "test_program")
 
 cmake_policy(SET CMP0063 NEW)
 
