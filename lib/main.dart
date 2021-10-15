@@ -175,7 +175,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   textStyle: const TextStyle(fontSize: 20),
                 ),
               ),
-            ])
+            ]),
+            const Text(
+              "If you can see this, I GOT IT WORKING",
+            )
           ],
         ),
       ),
