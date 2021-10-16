@@ -41,8 +41,10 @@ Fork: Copies someone else's repo to your github. The fork, AFAIK, is completely 
 
 Staging changes: Declaring your local changes before committing them.
 
-Commit and Push: Not sure what the difference is, but I think Visual Studio does both at the same time. Takes the staged changes and uploads(?) the changes to the remote repo on github
+Push Commit: Takes the staged changes and uploads(?) the changes to the remote repo on github. You have to add a commit message. 
 
 Pull Request: I think it means requesting to merge a branch to main.
 
-Upstream/Downstream: Not sure
+Upstream/Downstream: Not sure, but I think downstream is from a remote repo -> local, and upstream is from local repo -> remote
+
+Pull commit: Not sure, but I think it means taking upstream changes and saving them to the local repo
