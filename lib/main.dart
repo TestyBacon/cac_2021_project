@@ -60,10 +60,6 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void goToSettings() {
-    setState(() {});
-  }
-
   // void clearText(){
   //   TextField.clear()
   // }
@@ -84,7 +80,12 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
         actions: [
           IconButton(
-            onPressed: goToSettings,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Settings()),
+              );
+            },
             icon: const Icon(Icons.settings),
             color: const Color(0xff9ad5f4),
             highlightColor: Colors.blue,
@@ -188,5 +189,25 @@ class _MyHomePageState extends State<MyHomePage> {
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+}
+
+class Settings extends StatelessWidget {
+  const Settings({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("Settings"),
+        ),
+        body: Center(
+          child: ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: const Text("Go Back!"),
+          ),
+        ));
   }
 }
