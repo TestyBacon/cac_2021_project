@@ -50,16 +50,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-    });
-  }
-
   // void clearText(){
   //   TextField.clear()
   // }
@@ -83,9 +73,10 @@ class _MyHomePageState extends State<MyHomePage> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Settings()),
+                MaterialPageRoute(builder: (context) => const Settings()),
               );
             },
+            tooltip: 'Settings',
             icon: const Icon(Icons.settings),
             color: const Color(0xff9ad5f4),
             highlightColor: Colors.blue,
@@ -184,13 +175,15 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+        onPressed: () {},
+        tooltip: 'Vault',
+        child: const Icon(Icons.savings_rounded),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
+
+// Settings Page
 
 class Settings extends StatelessWidget {
   const Settings({Key? key}) : super(key: key);
@@ -199,7 +192,7 @@ class Settings extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Settings"),
+          title: const Text("Settings"),
         ),
         body: Center(
           child: ElevatedButton(
