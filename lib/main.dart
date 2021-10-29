@@ -25,6 +25,9 @@ class MyApp extends StatelessWidget {
         // primarySwatch: Colors.white,
         primaryColor: const Color(0xff9ad5f4),
         scaffoldBackgroundColor: const Color(0xff487B9a),
+        textTheme: const TextTheme(
+          bodyText1: TextStyle(fontSize: 25.0),
+        ),
       ),
       home: const MyHomePage(title: 'THE VOID'),
     );
@@ -109,8 +112,9 @@ class _MyHomePageState extends State<MyHomePage> {
             // Text(
             //   '$_counter',
             //   style: Theme.of(context).textTheme.headline4,
-            const Text(
+            Text(
               'Enter troubles here',
+              style: Theme.of(context).textTheme.bodyText1,
             ),
 
             TextField(
@@ -168,14 +172,20 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ]),
-            const Text(
-              "If you can see this, I GOT IT WORKING",
-            )
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => SendToVoid(
+                          savedText: Text(
+                        currentSaved,
+                        style: Theme.of(context).textTheme.bodyText1,
+                      ))));
+        },
         tooltip: 'Vault',
         child: const Icon(Icons.savings_rounded),
       ), // This trailing comma makes auto-formatting nicer for build methods.
@@ -188,6 +198,8 @@ class _MyHomePageState extends State<MyHomePage> {
 class Settings extends StatelessWidget {
   const Settings({Key? key}) : super(key: key);
 
+  get child => null;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -195,12 +207,72 @@ class Settings extends StatelessWidget {
           title: const Text("Settings"),
         ),
         body: Center(
-          child: ElevatedButton(
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          ElevatedButton(
             onPressed: () {
               Navigator.pop(context);
             },
             child: const Text("Go Back!"),
           ),
-        ));
+        ])));
+  }
+}
+
+class VaultView extends StatelessWidget {
+  const VaultView({Key? key, required this.savedText}) : super(key: key);
+
+  final Text savedText;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Vault"),
+      ),
+      body: Center(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          savedText,
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: const Text("Go Back!"),
+          )
+        ],
+      )),
+    );
+  }
+}
+
+class SendToVoid extends StatefulWidget {
+  const SendToVoid({Key? key, required this.savedText}) : super(key: key);
+  final Text savedText;
+  @override
+  _SendToVoidState createState() => _SendToVoidState();
+}
+
+class _SendToVoidState extends State<SendToVoid> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Vault"),
+      ),
+      body: Center(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          widget.savedText,
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: const Text("Go Back!"),
+          )
+        ],
+      )),
+    );
   }
 }
