@@ -225,9 +225,11 @@ class SendToVoid extends StatefulWidget {
 class _SendToVoidState extends State<SendToVoid> {
   double rotation = 0.0;
   double opacity = 1.0;
+  Duration duration = const Duration(milliseconds: 3000);
+  Curve curve = Curves.easeInBack;
   void change() {
     setState(() {
-      rotation = 10.0;
+      rotation = 7.0;
       opacity = 0.0;
     });
   }
@@ -243,14 +245,23 @@ class _SendToVoidState extends State<SendToVoid> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           AnimatedContainer(
+            padding: const EdgeInsets.all(8.0),
+            height: 100.0,
+            alignment: Alignment.center,
             child: AnimatedOpacity(
               opacity: opacity,
-              duration: const Duration(milliseconds: 3000),
-              curve: Curves.easeInOutBack,
-              child: widget.savedText,
+              duration: duration,
+              curve: curve,
+              child: AnimatedRotation(
+                turns: rotation,
+                duration: duration,
+                curve: curve,
+                // This is the text
+                child: widget.savedText,
+              ),
             ),
-            duration: const Duration(milliseconds: 0),
-            curve: Curves.easeInOutBack,
+            duration: duration,
+            curve: curve,
           ),
           ElevatedButton(
             onPressed: () {
@@ -274,12 +285,13 @@ class _SendToVoidState extends State<SendToVoid> {
 
 // Seriously ignore this
 
-// But don't delete it
+// But don't delete it yet
 
 // It's for animation reference
 
 // Stop reading this Jacob
 
+// Just animation Reference
 class StaggerAnimation extends StatelessWidget {
   StaggerAnimation({Key? key, required this.controller})
       :
