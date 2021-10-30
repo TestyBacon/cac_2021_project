@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 
 void main() {
   runApp(const MyApp());
@@ -162,8 +163,6 @@ class _MyHomePageState extends State<MyHomePage> {
 class Settings extends StatelessWidget {
   const Settings({Key? key}) : super(key: key);
 
-  get child => null;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -236,6 +235,10 @@ class _SendToVoidState extends State<SendToVoid> {
 
   @override
   Widget build(BuildContext context) {
+    Timer(const Duration(milliseconds: 100), () {
+      change();
+    });
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Vault"),
@@ -262,12 +265,6 @@ class _SendToVoidState extends State<SendToVoid> {
             ),
             duration: duration,
             curve: curve,
-          ),
-          ElevatedButton(
-            onPressed: () {
-              change();
-            },
-            child: const Text("Send to void"),
           ),
           ElevatedButton(
             onPressed: () {
