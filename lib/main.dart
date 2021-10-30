@@ -243,11 +243,13 @@ class _SendToVoidState extends State<SendToVoid> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           AnimatedContainer(
-            child: Opacity(
+            child: AnimatedOpacity(
               opacity: opacity,
+              duration: const Duration(milliseconds: 3000),
+              curve: Curves.easeInOutBack,
               child: widget.savedText,
             ),
-            duration: const Duration(seconds: 3),
+            duration: const Duration(milliseconds: 0),
             curve: Curves.easeInOutBack,
           ),
           ElevatedButton(
