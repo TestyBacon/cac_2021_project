@@ -21,10 +21,13 @@ class MyApp extends StatelessWidget {
         primaryColor: const Color(0xff9ad5f4),
         scaffoldBackgroundColor: const Color(0xff487B9a),
         textTheme: const TextTheme(
-          bodyText1: TextStyle(fontSize: 25.0),
-          bodyText2:
-              TextStyle(fontSize: 50.0, color: Colors.white), // Void text
-        ),
+            bodyText1: TextStyle(
+              fontSize: 25.0,
+            ),
+            bodyText2: TextStyle(fontSize: 50.0, color: Colors.white),
+            subtitle1:
+                TextStyle(fontSize: 25.0, color: Colors.white) // Void text
+            ),
       ),
       home: const MyHomePage(title: 'THE VOID'),
     );
@@ -229,8 +232,8 @@ class VaultView extends StatelessWidget {
             itemBuilder: (context, index) {
               return ListTile(
                 title: Text(itemList[index],
-                    style: Theme.of(context).textTheme.bodyText1),
-                tileColor: Colors.white,
+                    style: Theme.of(context).textTheme.subtitle1),
+                // tileColor: Colors.white,
               );
             }));
   }
@@ -248,12 +251,14 @@ class SendToVoid extends StatefulWidget {
 class _SendToVoidState extends State<SendToVoid> {
   double rotation = 0.0;
   double opacity = 1.0;
+  double scale = 1.0;
   Duration duration = const Duration(milliseconds: 3500);
-  Curve curve = Curves.easeInBack;
+  Curve curve = Curves.easeIn;
   void change() {
     setState(() {
       rotation = 7.0;
       opacity = 0.0;
+      scale = 0.0;
     });
   }
 
@@ -284,7 +289,12 @@ class _SendToVoidState extends State<SendToVoid> {
                 duration: duration,
                 curve: curve,
                 // This is the text
-                child: widget.savedText,
+                child: AnimatedScale(
+                  scale: scale,
+                  duration: duration,
+                  curve: curve,
+                  child: widget.savedText,
+                ),
               ),
             ),
             duration: duration,
