@@ -91,9 +91,12 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                const Text(
-                  'Enter troubles here',
-                  style: TextStyle(fontSize: 40),
+                const Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Text(
+                    'Enter troubles here',
+                    style: TextStyle(fontSize: 40),
+                  ),
                 ),
 
                 TextField(
