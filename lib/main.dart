@@ -298,7 +298,7 @@ class _SendToVoidState extends State<SendToVoid> {
 
   @override
   Widget build(BuildContext context) {
-    Timer(const Duration(milliseconds: 100), () {
+    Timer(const Duration(milliseconds: 0), () {
       change();
     });
 
