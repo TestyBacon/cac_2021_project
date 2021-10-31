@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
-  GoogleFonts.config.allowRuntimeFetching = false;
+  GoogleFonts.config.allowRuntimeFetching = true;
 }
 
 // Main driver thing
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
                 TextStyle(fontSize: 25.0, color: Colors.white) // Void text
             ),
       ),
-      home: const MyHomePage(title: 'THE VOID'),
+      home: const MyHomePage(title: 'The Void'),
     );
   }
 }
@@ -67,7 +67,10 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.transparent,
-            title: Text(widget.title),
+            title: Text(
+              widget.title,
+              style: GoogleFonts.alexBrush(fontSize: 40),
+            ),
             actions: [
               // Settings button
               IconButton(
@@ -88,7 +91,10 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text('Enter troubles here', style: GoogleFonts.alexBrush()),
+                const Text(
+                  'Enter troubles here',
+                  style: TextStyle(fontSize: 40),
+                ),
 
                 TextField(
                   controller: fieldControl,
@@ -242,19 +248,25 @@ class VaultView extends StatelessWidget {
   final List itemList;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text("Vault"),
-        ),
-        body: ListView.builder(
-            itemCount: itemList.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(itemList[index],
-                    style: Theme.of(context).textTheme.subtitle1),
-                // tileColor: Colors.white,
-              );
-            }));
+    return Container(
+        decoration: const BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [Color(0xff94c9f0), Color(0xffd48fd1)])),
+        child: Scaffold(
+            appBar: AppBar(
+              title: const Text("Vault"),
+            ),
+            body: ListView.builder(
+                itemCount: itemList.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text(itemList[index],
+                        style: Theme.of(context).textTheme.subtitle1),
+                    // tileColor: Colors.white,
+                  );
+                })));
   }
 }
 
