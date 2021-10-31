@@ -47,6 +47,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   var fieldControl = TextEditingController();
   var currentSaved = "";
+  List savedItems = [];
 
   @override
   Widget build(BuildContext context) {
@@ -104,6 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: () {
                   currentSaved = fieldControl.text;
                   fieldControl.text = "";
+                  savedItems.add(currentSaved);
                 },
                 style: TextButton.styleFrom(
                   padding: const EdgeInsets.all(16.0),
@@ -154,8 +156,10 @@ class _MyHomePageState extends State<MyHomePage> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) =>
-                      VaultView(savedText: Text(currentSaved))));
+                  builder: (context) => VaultView(
+                        savedText: Text(currentSaved),
+                        itemList: savedItems,
+                      )));
         },
         tooltip: 'Vault',
         child: const Icon(Icons.savings_rounded),
@@ -165,7 +169,6 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 // Settings Page
-// Theres literally nothing on here
 
 class Settings extends StatelessWidget {
   const Settings({Key? key}) : super(key: key);
@@ -179,12 +182,29 @@ class Settings extends StatelessWidget {
         body: Center(
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              onPressed: () {},
+              child: const Text("Change Color"),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              onPressed: () {},
+              child: const Text("Change Font"),
+            ),
+          ),
           // Go Back
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: const Text("Go Back!"),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text("Go Back!"),
+            ),
           ),
         ])));
   }
@@ -193,29 +213,26 @@ class Settings extends StatelessWidget {
 // Vault screen
 
 class VaultView extends StatelessWidget {
-  const VaultView({Key? key, required this.savedText}) : super(key: key);
+  const VaultView({Key? key, required this.savedText, required this.itemList})
+      : super(key: key);
 
   final Text savedText;
+  final List itemList;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Vault"),
-      ),
-      body: Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          savedText,
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: const Text("Go Back!"),
-          )
-        ],
-      )),
-    );
+        appBar: AppBar(
+          title: const Text("Vault"),
+        ),
+        body: ListView.builder(
+            itemCount: itemList.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Text(itemList[index],
+                    style: Theme.of(context).textTheme.bodyText1),
+                tileColor: Colors.white,
+              );
+            }));
   }
 }
 
