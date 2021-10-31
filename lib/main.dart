@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
+  GoogleFonts.config.allowRuntimeFetching = true;
 }
 
 // Main driver thing
@@ -13,23 +15,25 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'THE VOID',
 
       // Theme for whole app
 
       theme: ThemeData(
         primaryColor: const Color(0xff9ad5f4),
-        scaffoldBackgroundColor: const Color(0xff487B9a),
+        scaffoldBackgroundColor: Colors.transparent,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.transparent,
+        ),
         textTheme: const TextTheme(
-            bodyText1: TextStyle(
-              fontSize: 25.0,
-            ),
+            bodyText1: TextStyle(fontSize: 25.0, color: Colors.white),
             bodyText2: TextStyle(fontSize: 50.0, color: Colors.white),
             subtitle1:
                 TextStyle(fontSize: 25.0, color: Colors.white) // Void text
             ),
       ),
-      home: const MyHomePage(title: 'THE VOID'),
+      home: const MyHomePage(title: 'The Void'),
     );
   }
 }
@@ -54,120 +58,134 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-        actions: [
-          // Settings button
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Settings()),
-              );
-            },
-            tooltip: 'Settings',
-            icon: const Icon(Icons.settings),
-            color: const Color(0xff9ad5f4),
-            highlightColor: Colors.blue,
-          )
-        ],
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Enter troubles here',
-              style: Theme.of(context).textTheme.bodyText1,
+    return Container(
+        decoration: const BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [Color(0xff42d0bd), Color(0xff3a9efa)])),
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            title: Text(
+              widget.title,
+              style: GoogleFonts.alexBrush(fontSize: 40),
             ),
-
-            TextField(
-              controller: fieldControl,
-              maxLines: null,
-              style: const TextStyle(
-                color: Colors.white,
-              ),
-              decoration: const InputDecoration(
-                  fillColor: Color(0xff0A1127),
-                  filled: true,
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.red),
-                  ),
-                  border: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white))),
-            ),
-            // Row of Buttons
-            Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-              // Button 1
-              TextButton(
-                child: const Text('SUBMIT'),
+            actions: [
+              // Settings button
+              IconButton(
                 onPressed: () {
-                  currentSaved = fieldControl.text;
-                  fieldControl.text = "";
-                  savedItems.add(currentSaved);
-                },
-                style: TextButton.styleFrom(
-                  padding: const EdgeInsets.all(16.0),
-                  primary: Colors.white,
-                  textStyle: const TextStyle(fontSize: 20),
-                ),
-              ),
-              // Button 2
-              TextButton(
-                child: const Text('CLEAR'),
-                onPressed: () {
-                  fieldControl.text = "";
-                },
-                style: TextButton.styleFrom(
-                  padding: const EdgeInsets.all(16.0),
-                  primary: Colors.white,
-                  textStyle: const TextStyle(fontSize: 20),
-                ),
-              ),
-              // Button 3
-              TextButton(
-                child: const Text('SEND TO VOID'),
-                onPressed: () {
-                  Text voidText = Text(fieldControl.text,
-                      style: Theme.of(context).textTheme.bodyText2);
-                  currentSaved = '';
-                  fieldControl.text = '';
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              SendToVoid(savedText: voidText)));
+                    context,
+                    MaterialPageRoute(builder: (context) => const Settings()),
+                  );
                 },
-                style: TextButton.styleFrom(
-                  padding: const EdgeInsets.all(16.0),
-                  primary: Colors.white,
-                  textStyle: const TextStyle(fontSize: 20),
+                tooltip: 'Settings',
+                icon: const Icon(Icons.settings),
+                color: const Color(0xff9ad5f4),
+                highlightColor: Colors.blue,
+              )
+            ],
+          ),
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const Text(
+                  'Enter troubles here',
+                  style: TextStyle(fontSize: 40),
                 ),
-              ),
-            ]),
-          ],
-        ),
-      ),
-      // Vault button
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // Vault screen (temporarily void screen)
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => VaultView(
-                        savedText: Text(currentSaved),
-                        itemList: savedItems,
-                      )));
-        },
-        tooltip: 'Vault',
-        child: const Icon(Icons.savings_rounded),
-      ),
-    );
+
+                TextField(
+                  controller: fieldControl,
+                  maxLines: null,
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ),
+                  decoration: const InputDecoration(
+                      // fillColor: Color(0xff0A1127),
+                      filled: true,
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white))),
+                  // border: UnderlineInputBorder(
+                  //     borderSide: BorderSide(color: Colors.white))),
+                ),
+                // Row of Buttons
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      // Button 1
+                      TextButton(
+                        child: const Text('SUBMIT'),
+                        onPressed: () {
+                          currentSaved = fieldControl.text;
+                          fieldControl.text = "";
+                          savedItems.add(currentSaved);
+                        },
+                        style: TextButton.styleFrom(
+                          padding: const EdgeInsets.all(16.0),
+                          primary: Colors.white,
+                          textStyle: const TextStyle(fontSize: 20),
+                        ),
+                      ),
+                      // Button 2
+                      TextButton(
+                        child: const Text('CLEAR'),
+                        onPressed: () {
+                          fieldControl.text = "";
+                        },
+                        style: TextButton.styleFrom(
+                          padding: const EdgeInsets.all(16.0),
+                          primary: Colors.white,
+                          textStyle: const TextStyle(fontSize: 20),
+                        ),
+                      ),
+                      // Button 3
+                      TextButton(
+                        child: const Text('SEND TO VOID'),
+                        onPressed: () {
+                          Text voidText = Text(fieldControl.text,
+                              style: Theme.of(context).textTheme.bodyText2);
+                          currentSaved = '';
+                          fieldControl.text = '';
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      SendToVoid(savedText: voidText)));
+                        },
+                        style: TextButton.styleFrom(
+                          padding: const EdgeInsets.all(16.0),
+                          primary: Colors.white,
+                          textStyle: const TextStyle(fontSize: 20),
+                        ),
+                      ),
+                    ]),
+              ],
+            ),
+          ),
+          // Vault button
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              // Vault screen (temporarily void screen)
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => VaultView(
+                            savedText: Text(currentSaved),
+                            itemList: savedItems,
+                          )));
+            },
+            tooltip: 'Vault',
+            child: const Icon(Icons.savings_rounded),
+          ),
+        ));
   }
 }
 
@@ -178,38 +196,45 @@ class Settings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text("Settings"),
-        ),
-        body: Center(
-            child:
-                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton(
-              onPressed: () {},
-              child: const Text("Change Color"),
+    return Container(
+        decoration: const BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [Color(0xff42d0bd), Color(0xff3a9efa)])),
+        child: Scaffold(
+            appBar: AppBar(
+              title: const Text("Settings"),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton(
-              onPressed: () {},
-              child: const Text("Change Font"),
-            ),
-          ),
-          // Go Back
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text("Go Back!"),
-            ),
-          ),
-        ])));
+            body: Center(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      child: const Text("Change Color"),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      child: const Text("Change Font"),
+                    ),
+                  ),
+                  // Go Back
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text("Go Back!"),
+                    ),
+                  ),
+                ]))));
   }
 }
 
@@ -223,19 +248,25 @@ class VaultView extends StatelessWidget {
   final List itemList;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text("Vault"),
-        ),
-        body: ListView.builder(
-            itemCount: itemList.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(itemList[index],
-                    style: Theme.of(context).textTheme.subtitle1),
-                // tileColor: Colors.white,
-              );
-            }));
+    return Container(
+        decoration: const BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [Color(0xff94c9f0), Color(0xffd48fd1)])),
+        child: Scaffold(
+            appBar: AppBar(
+              title: const Text("Vault"),
+            ),
+            body: ListView.builder(
+                itemCount: itemList.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text(itemList[index],
+                        style: Theme.of(context).textTheme.subtitle1),
+                    // tileColor: Colors.white,
+                  );
+                })));
   }
 }
 
@@ -271,7 +302,9 @@ class _SendToVoidState extends State<SendToVoid> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: const Text("THE VOID"),
+        title: const Text("THE VOID"
+            // TextStyle(color: Colors.black),
+            ),
       ),
       body: Center(
           child: Column(
